@@ -15,7 +15,6 @@ Feedback is welcome.
 ## Usage
 - [Group](#user-content-group)
 - [Assignments](#user-content-assignments)
-- [Listening](#user-content-listening)
 
 ### Group
 
