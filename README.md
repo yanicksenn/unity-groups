@@ -13,35 +13,24 @@ Feedback is welcome.
 4. Click "Add"
 
 ## Usage
-- [Group](#user-content-group)
-- [Assignments](#user-content-assignments)
+- [Default Group](#user-content-default-group)
+- [Default Group Container](#user-content-default-group-container)
+- [Custom Group](#user-content-default-custom-container)
+- [Custom Group Container](#user-content-custom-group-container)
 
-### Group
+### Default Group
 
-Groups can be created through the asset menu > Create > Groups > ... .
+Default groups can be created through the asset menu > Create > Groups > ... .
 
 ![Asset menu](./Documentation/asset-menu.png)
 
-### Assignments
+### Default Group Container
 
-Groups can be assgined to `GameObject`s through the component `GroupAssignments`.
+Deafult groups can be assgined to `GameObject`s through the component `DefaultGroupContainer`.
 
-![Context menu asset](./Documentation/group-assignments.png)
+![Context menu asset](./Documentation/default-group-container.png)
 
-At runtime the assigned `Group`s can be used find all `GameObject`s that have are assigned to this group.
-At runtime the groups can be used to find all assigned `GameObject`s.
+As soon the `OnEnable()` of this component is called the `GameObject` is added to all groups specified in the container.
 
-```c#
-public class MyBehaviour : MonoBehaviour
-{
-    [SerializeField]
-    private Group group;
-
-    private void Update()
-    {
-        foreach (var gameObject in group)
-            Debug.Log(gameObject.name);
-    }
-}
-```
+It is possible to iterate through the groups the 
 

@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 
 namespace Groups.Tests
 {
-    public class GroupAssignmentsTest
+    public class GroupContainerTest
     {
         [UnityTest]
         public IEnumerator AssertGameObjectIsAddedWhenActiveTrue()
@@ -14,13 +14,13 @@ namespace Groups.Tests
             var group = ScriptableObject.CreateInstance<Group>();
             
             var gameObject = new GameObject();
-            var affiliations = gameObject.AddComponent<GroupAssignments>();
-            affiliations.AddAssignment(group);
+            var affiliations = gameObject.AddComponent<GroupContainer>();
+            affiliations.AddGroup(group);
             gameObject.SetActive(false);
             gameObject.SetActive(true);
             
-            Assert.AreEqual(1, group.GameObjects.Count());
-            Assert.IsTrue(group.GameObjects.Contains(gameObject));
+            Assert.AreEqual(1, group.Count);
+            Assert.IsTrue(group.Contains(gameObject));
             yield return null;
         }
         
@@ -30,13 +30,13 @@ namespace Groups.Tests
             var group = ScriptableObject.CreateInstance<Group>();
             
             var gameObject = new GameObject();
-            var affiliations = gameObject.AddComponent<GroupAssignments>();
-            affiliations.AddAssignment(group);
+            var affiliations = gameObject.AddComponent<GroupContainer>();
+            affiliations.AddGroup(group);
             gameObject.SetActive(false);
             gameObject.SetActive(true);
             gameObject.SetActive(false);
             
-            Assert.AreEqual(0, group.GameObjects.Count());
+            Assert.AreEqual(0, group.Count);
             yield return null;
         }
 
@@ -46,13 +46,13 @@ namespace Groups.Tests
             var group = ScriptableObject.CreateInstance<Group>();
             
             var gameObject = new GameObject();
-            var affiliations = gameObject.AddComponent<GroupAssignments>();
-            affiliations.AddAssignment(group);
+            var affiliations = gameObject.AddComponent<GroupContainer>();
+            affiliations.AddGroup(group);
             gameObject.SetActive(false);
             gameObject.SetActive(true);
 
-            affiliations.RemoveAssignment(group);
-            Assert.AreEqual(0, group.GameObjects.Count());
+            affiliations.RemoveGroup(group);
+            Assert.AreEqual(0, group.Count);
             yield return null;
         }
 
@@ -62,13 +62,13 @@ namespace Groups.Tests
             var group = ScriptableObject.CreateInstance<Group>();
             
             var gameObject = new GameObject();
-            var affiliations = gameObject.AddComponent<GroupAssignments>();
+            var affiliations = gameObject.AddComponent<GroupContainer>();
             gameObject.SetActive(false);
             gameObject.SetActive(true);
             
-            affiliations.AddAssignment(group);
-            Assert.AreEqual(1, group.GameObjects.Count());
-            Assert.IsTrue(group.GameObjects.Contains(gameObject));
+            affiliations.AddGroup(group);
+            Assert.AreEqual(1, group.Count);
+            Assert.IsTrue(group.Contains(gameObject));
             yield return null;
         }
     }

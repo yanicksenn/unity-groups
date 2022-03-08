@@ -4,13 +4,21 @@ using UnityEngine;
 
 namespace Groups
 {
-    [CreateAssetMenu(menuName = Groups.RootMenu + "/Create group", fileName = "Group")]
-    public class Group : ScriptableObject, IEnumerable<GameObject>
+    /// <summary>
+    /// Group providing functionality GameObject add and remove GameObjects.
+    /// </summary>
+    [CreateAssetMenu(menuName = GroupConstants.RootMenu + "/Create group", fileName = "Group")]
+    public class Group : ScriptableObject, IReadOnlyList<GameObject>
     {
-        private readonly List<GameObject> _gameObjects = new List<GameObject>();
-        public IEnumerable<GameObject> GameObjects => _gameObjects.AsReadOnly();
+        private readonly List<GameObject> _groupedObjects = new List<GameObject>();
 
-        [SerializeField, TextArea]
+        public int Count => _groupedObjects.Count;
+        public GameObject this[int index] => _groupedObjects[index];
+
+        /// <summary>
+        /// The description.
+        /// </summary>
+        [SerializeField, TextArea] 
         private string description;
         public string Description
         {
@@ -18,21 +26,42 @@ namespace Groups
             set => description = value;
         }
 
-        public void AddGameObject(GameObject gameObject)
+        /// <summary>
+        /// The events.
+        /// </summary>
+        [SerializeField, Space]
+        private GroupEventsWrapper events = new GroupEventsWrapper();
+        public GroupEventsWrapper Events => events;
+
+        /// <summary>
+        /// Adds the provided object GameObject this group.
+        /// </summary>
+        /// <param name="obj">Object GameObject add</param>
+        public void Add(GameObject obj)
         {
-            if (gameObject != null)
-                _gameObjects.Add(gameObject);
+            if (obj == null)
+                return;
+            
+            _groupedObjects.Add(obj);
+            Events.OnAddEvent.Invoke(obj);
         }
 
-        public void RemoveGameObject(GameObject gameObject)
+        /// <summary>
+        /// Removes the provided object from this group.
+        /// </summary>
+        /// <param name="obj">Object GameObject remove</param>
+        public void Remove(GameObject obj)
         {
-            if (gameObject != null)
-                _gameObjects.Remove(gameObject);
+            if (obj == null)
+                return;
+            
+            _groupedObjects.Remove(obj);
+            Events.OnRemoveEvent.Invoke(obj);
         }
 
         public IEnumerator<GameObject> GetEnumerator()
         {
-            return GameObjects.GetEnumerator();
+            return _groupedObjects.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

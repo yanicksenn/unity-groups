@@ -5,7 +5,9 @@
   "description": "Unity3d groups allowing for the grouping and categorization of game objects.",
   "unity": "2020.3",
   "unityRelease": "14f1",
-  "dependencies": { },
+  "dependencies": {
+    "com.yanicksenn.unity.tests": "https://github.com/yanicksenn/unity-tests.git#1.0.0"
+  },
   "keywords": [ ],
   "author": {
     "name": "Yanick Senn",

@@ -4,7 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Groups"
+        "Groups",
+        "Tests"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

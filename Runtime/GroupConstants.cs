@@ -3,7 +3,7 @@ namespace Groups
     /// <summary>
     /// Util class holding constants.
     /// </summary>
-    public static class Groups
+    public static class GroupConstants
     {
         /// <summary>
         /// Root menu of the groups.
