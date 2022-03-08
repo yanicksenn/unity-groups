@@ -13,24 +13,30 @@ Feedback is welcome.
 4. Click "Add"
 
 ## Usage
-- [Default Group](#user-content-default-group)
-- [Default Group Container](#user-content-default-group-container)
-- [Custom Group](#user-content-default-custom-container)
-- [Custom Group Container](#user-content-custom-group-container)
+- [Group](#user-content-group)
+   - [Events](#user-content-events)
+- [Group Container](#user-content-group-container)
 
-### Default Group
+### Group
 
-Default groups can be created through the asset menu > Create > Groups > ... .
+Groups can be created through the asset menu > Create > Groups > ... .
 
 ![Asset menu](./Documentation/asset-menu.png)
 
-### Default Group Container
+#### Events
 
-Deafult groups can be assgined to `GameObject`s through the component `DefaultGroupContainer`.
+It is possible to listen to the addition and removal of `GameObjects`.
 
-![Context menu asset](./Documentation/default-group-container.png)
+![Asset menu](./Documentation/group.png)
 
-As soon the `OnEnable()` of this component is called the `GameObject` is added to all groups specified in the container.
+### Group Container
 
-It is possible to iterate through the groups the 
+`GroupContainers` can be used to assign `Groups` to a `GameObject`.
+
+![Context menu asset](./Documentation/group-container.png)
+
+The event `OnEnable()` of the Component will automatically add the `GameObject` to all assigned `Groups`.
+The invocation of `OnDisable()` will revers this process.
+
+
 
