@@ -6,7 +6,7 @@
   "unity": "2020.3",
   "unityRelease": "14f1",
   "dependencies": {
-    "com.yanicksenn.unity.tests": "https://github.com/yanicksenn/unity-tests.git#1.0.0"
+    "com.yanicksenn.unity.tests": "https://github.com/yanicksenn/unity-tests.git#1.2.0"
   },
   "keywords": [ ],
   "author": {
