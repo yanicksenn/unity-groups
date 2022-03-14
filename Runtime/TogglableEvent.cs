@@ -37,6 +37,7 @@ namespace Groups
         {
             if (Active)
                 UnityEvent.Invoke();
+            
             return Active;
         }
     }

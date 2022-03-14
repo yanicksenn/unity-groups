@@ -1,0 +1,16 @@
+{
+    "name": "Groups.Editor",
+    "rootNamespace": "Groups.Editor",
+    "references": [
+        "Groups"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
