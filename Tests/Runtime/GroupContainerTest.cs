@@ -8,8 +8,8 @@ namespace Groups.Tests
 {
     public class GroupContainerTest
     {
-        [UnityTest]
-        public IEnumerator AssertGameObjectIsAddedWhenActiveTrue()
+        [Test]
+        public void AssertGameObjectIsAddedWhenActiveTrue()
         {
             var group = ScriptableObject.CreateInstance<Group>();
             
@@ -21,11 +21,10 @@ namespace Groups.Tests
             
             Assert.AreEqual(1, group.Count);
             Assert.IsTrue(group.Contains(gameObject));
-            yield return null;
         }
         
-        [UnityTest]
-        public IEnumerator AssertGameObjectIsRemovedWhenActiveFalse()
+        [Test]
+        public void AssertGameObjectIsRemovedWhenActiveFalse()
         {
             var group = ScriptableObject.CreateInstance<Group>();
             
@@ -37,11 +36,10 @@ namespace Groups.Tests
             gameObject.SetActive(false);
             
             Assert.AreEqual(0, group.Count);
-            yield return null;
         }
 
-        [UnityTest]
-        public IEnumerator AssertGameObjectIsRemovedWhenAffiliationIsRemoved()
+        [Test]
+        public void AssertGameObjectIsRemovedWhenAffiliationIsRemoved()
         {
             var group = ScriptableObject.CreateInstance<Group>();
             
@@ -53,11 +51,10 @@ namespace Groups.Tests
 
             affiliations.RemoveGroup(group);
             Assert.AreEqual(0, group.Count);
-            yield return null;
         }
 
-        [UnityTest]
-        public IEnumerator AssertGameObjectIsAddedWhenAffiliationIsAdded()
+        [Test]
+        public void AssertGameObjectIsAddedWhenAffiliationIsAdded()
         {
             var group = ScriptableObject.CreateInstance<Group>();
             
@@ -69,7 +66,14 @@ namespace Groups.Tests
             affiliations.AddGroup(group);
             Assert.AreEqual(1, group.Count);
             Assert.IsTrue(group.Contains(gameObject));
-            yield return null;
+        }
+
+        [TearDown]
+        public void RemoveAllGameObjects()
+        {
+            Object.FindObjectsOfType<GameObject>()
+                .ToList()
+                .ForEach(Object.Destroy);
         }
     }
 }

@@ -1,24 +1,21 @@
-using System.Collections;
 using System.Linq;
 using NUnit.Framework;
 using Tests;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace Groups.Tests
 {
     public class GroupTest
     {
-        [UnityTest]
-        public IEnumerator AssertRuntimeSetHasInitiallyNoGameObjects()
+        [Test]
+        public void AssertRuntimeSetHasInitiallyNoGameObjects()
         {
             var group = ScriptableObject.CreateInstance<Group>();
             Assert.AreEqual(0, group.Count);
-            yield return null;
         }
 
-        [UnityTest]
-        public IEnumerator AssertRuntimeSetBehaviour()
+        [Test]
+        public void AssertRuntimeSetBehaviour()
         {
             var group = ScriptableObject.CreateInstance<Group>();
             
@@ -50,7 +47,9 @@ namespace Groups.Tests
             addListener.AssertInvocationsWithPayload(gameObject2, 1);
             removeListener.AssertNoInvocationWithPayload(gameObject1);
             removeListener.AssertInvocationsWithPayload(gameObject2, 1);
-            yield return null;
+            
+            Object.Destroy(gameObject1);
+            Object.Destroy(gameObject2);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Groups
@@ -10,10 +11,10 @@ namespace Groups
     [CreateAssetMenu(menuName = GroupConstants.RootMenu + "/Create group", fileName = "Group")]
     public class Group : ScriptableObject, IReadOnlyList<GameObject>
     {
-        private readonly List<GameObject> _groupedObjects = new List<GameObject>();
+        private readonly List<GameObject> groupedObjects = new List<GameObject>();
 
-        public int Count => _groupedObjects.Count;
-        public GameObject this[int index] => _groupedObjects[index];
+        public int Count => groupedObjects.Count;
+        public GameObject this[int index] => groupedObjects[index];
 
         /// <summary>
         /// The description.
@@ -36,32 +37,43 @@ namespace Groups
         /// <summary>
         /// Adds the provided object GameObject this group.
         /// </summary>
-        /// <param name="obj">Object GameObject add</param>
+        /// <param name="obj">GameObject to add</param>
         public void Add(GameObject obj)
         {
             if (obj == null)
                 return;
             
-            _groupedObjects.Add(obj);
+            groupedObjects.Add(obj);
             Events.OnAddEvent.Invoke(obj);
         }
 
         /// <summary>
         /// Removes the provided object from this group.
         /// </summary>
-        /// <param name="obj">Object GameObject remove</param>
+        /// <param name="obj">GameObject to remove</param>
         public void Remove(GameObject obj)
         {
             if (obj == null)
                 return;
             
-            _groupedObjects.Remove(obj);
+            groupedObjects.Remove(obj);
             Events.OnRemoveEvent.Invoke(obj);
+        }
+
+        /// <summary>
+        /// Returns if the provided GameObject is part of this group.
+        /// </summary>
+        /// <param name="obj">GameObject to check</param>
+        /// <returns>If GameObject is part of this group</returns>
+        public bool IsRelevant(GameObject obj)
+        {
+            var groupContainer = obj.GetComponent<GroupContainer>();
+            return groupContainer != null && groupContainer.Contains(this);
         }
 
         public IEnumerator<GameObject> GetEnumerator()
         {
-            return _groupedObjects.GetEnumerator();
+            return groupedObjects.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
