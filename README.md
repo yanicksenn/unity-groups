@@ -1,5 +1,5 @@
 # Unity Groups
-Unity3d groups allowing for the grouping and categorization of GameObjects.
+Unity3d package allowing the grouping and categorization of GameObjects.
 
 This project is inspired on the [presentation](https://youtu.be/raQ3iHhE_Kk?t=1673) by [Ryan Hipple](https://twitter.com/roboryantron).
 
